@@ -1,0 +1,5 @@
+.claude/token-usage.jsonl
+.claude/instructions-loaded.jsonl
+.claude/worktrees/
+.claude/settings.local.json
+.DS_Store
