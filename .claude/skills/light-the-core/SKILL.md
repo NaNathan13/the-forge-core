@@ -31,27 +31,19 @@ Ask once via AskUserQuestion (skip if the user invoked with an explicit path):
 
 On `Cancel`, stop.
 
-### 2. Find the installer
+### 2. Run the installer
 
-`light-the-core.sh` lives at the root of the Core repo. Resolve its absolute path. If the user is *inside* the Core repo right now, it's `./light-the-core.sh`. If they invoked the skill from elsewhere, you may need to clone the Core repo or ask the user where they have it checked out.
-
-For the common case (the user has Core cloned and is invoking from inside it, *or* from a sibling project), assume the script is on their `PATH` or runnable via the absolute path they cloned to. If you can't find it, ask once:
-
-> Where is `light-the-core.sh`? (path to the Core repo or to the script itself)
-
-### 3. Run the installer
-
-Execute the script against the target:
+Install into the target with the one-step command — it fetches Core and installs, no clone needed:
 
 ```bash
-<path-to>/light-the-core.sh <target-dir>
+curl -fsSL https://raw.githubusercontent.com/NaNathan13/the-forge-core/main/light-the-core.sh | bash -s -- <target-dir>
 ```
 
-(Or just `<path-to>/light-the-core.sh` if the target is the current working directory.)
+If a local checkout is already on hand (e.g. you're running from inside the Core repo), run `<path>/light-the-core.sh <target-dir>` instead — same result, no fetch.
 
-Stream its output to the user. The script prints what it copied; don't duplicate that summary.
+Stream its output to the user. The script prints what it copied; don't duplicate that summary. If it exits non-zero (target already has `.claude/plans/`, no network, git missing), surface its stderr verbatim and stop.
 
-### 4. Fill in the project docs
+### 3. Fill in the project docs
 
 The installer drops `CLAUDE.md`, `CONTEXT.md`, and `README.md` with `<placeholder: ...>` markers. Ask three questions — as a short batch, freeform answers (not multiple-choice) — then write the answers into the docs:
 
@@ -71,7 +63,7 @@ Then edit the placeholder lines in the target docs — and *only* those lines, l
 
 If the installer **skipped** a doc because it already existed (the user had their own), leave that doc alone — don't overwrite their content with answers.
 
-### 5. Report the outcome
+### 4. Report the outcome
 
 If the script exited 0, print:
 

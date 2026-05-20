@@ -16,23 +16,20 @@ No GitHub issues, no PRs, no orchestrators, no subagents, no token accounting. G
 
 ## How to get started
 
-The Forge Core drops into any project with one script — `light-the-core.sh`.
+From your project directory, run the installer. It fetches The Forge Core and installs it in **one step** — no separate clone:
 
 ```bash
-# 1. Get The Forge Core
-git clone https://github.com/NaNathan13/the-forge-core.git
-
-# 2. Install it into your project
 cd /path/to/your/project
-/path/to/the-forge-core/light-the-core.sh
-
-# 3. Open the project in Claude Code and run the first phase
-/ponder
+curl -fsSL https://raw.githubusercontent.com/NaNathan13/the-forge-core/main/light-the-core.sh | bash
 ```
 
-`light-the-core.sh` copies the skills into `.claude/skills/`, scaffolds `.claude/plans/{active,done}/`, and drops starter `CLAUDE.md` / `CONTEXT.md` / `README.md` — only if you don't already have them; it never overwrites your docs. It refuses to run if the project already has `.claude/plans/` (so you can't clobber an existing install).
+Then open the project in Claude Code and run `/ponder`.
 
-**Prefer to set it up from inside Claude?** Run the `/light-the-core` skill instead of the bare script. It runs the same installer, then asks three quick questions — project name, a one-line description, and your tech stack (including the check command `/forge` and `/temper` will run) — and fills the starter docs in for you.
+The installer copies the skills into `.claude/skills/`, scaffolds `.claude/plans/{active,done}/`, and drops starter `CLAUDE.md` / `CONTEXT.md` / `README.md` — only if you don't already have them; it never overwrites your docs. It refuses to run if the project already has `.claude/plans/` (so you can't clobber an existing install).
+
+> Already have the repo cloned? Run `./light-the-core.sh /path/to/your/project` instead — same result, no fetch.
+
+**Prefer to set it up from inside Claude?** Run the `/light-the-core` skill instead of the one-liner. It runs the same installer, then asks three quick questions — project name, a one-line description, and your tech stack (including the check command `/forge` and `/temper` will run) — and fills the starter docs in for you.
 
 ## Plan-file shape
 
