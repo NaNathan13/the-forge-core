@@ -6,7 +6,7 @@
 #   ./light-the-core.sh <target-dir>    # install into the named dir
 #
 # What it copies:
-#   .claude/skills/         — all skills (the five phases + grill-me + diagnose)
+#   .claude/skills/         — all skills (the five workflow skills + grill-me, diagnose, scrub)
 #   .claude/plans/{active,done}/ — empty plan dirs (with .gitkeep)
 #   .claude/settings.json   — starter allowlist (only if missing in target)
 #   templates/CLAUDE.md     → target/CLAUDE.md  (only if missing)

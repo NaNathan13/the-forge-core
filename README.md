@@ -49,6 +49,7 @@ Detail and acceptance notes.
 - **forge** · **temper** · **seal** — build, review/harden, finish.
 - **grill-me** — stress-test an idea (used by `/ponder`).
 - **diagnose** — disciplined debugging loop (handy in `/temper`).
+- **scrub** — tidy up: reconcile plan-state drift, re-render stale progress bars, sweep junk.
 
 ## Using it in another project
 
