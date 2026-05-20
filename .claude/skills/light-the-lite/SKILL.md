@@ -62,7 +62,7 @@ Target:        <target-dir>
 Plans live in: <target-dir>/.claude/plans/active/
 Templates:     CLAUDE.md, CONTEXT.md, README.md (copied only if missing)
 
-Next: /ponder   (or /prototype for fast-path single-slice work)
+Next: /ponder
 ```
 
 If the script exited non-zero (target already has `.claude/plans/`, target doesn't exist, permission error), surface the script's stderr verbatim and stop.

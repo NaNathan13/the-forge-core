@@ -1,143 +1,66 @@
 ---
 name: inscribe
-description: Write up the plan file from resolved /ponder decisions. No GitHub issues, no PRs — just a single Markdown plan under .claude/plans/active/<slug>.md. Sub-skill of Ponder, auto-invoked after the grill. Also callable standalone when decisions are already resolved. Triggered by /inscribe, "write it up", "write the plan".
+description: Write the plan file from resolved /ponder decisions and slice it into parts. Creates a single markdown plan under .claude/plans/active/<slug>.md with a progress block and one section per slice. Sub-skill of the planning phase; also callable standalone when the work is already clear. Triggered by /inscribe, "write the plan", "write it up".
 ---
 
-# Inscribe — write up the plan, hand off
+# /inscribe — write and slice the plan
 
-The "writing" sub-skill of Ponder for The Forge Lite. Takes resolved design decisions and produces a single plan file under `.claude/plans/active/<slug>.md`. That file is the entire artifact — no PRDs, no GitHub issues, no kanban moves.
-
-**Inscribe does NOT grill.** If decisions are unresolved, stop and tell the user to run `/ponder` first. Inscribe's job is mechanical: pick the slug → write the plan → hand off.
-
-## Invocation
+`/inscribe` records the understanding reached in `/ponder` as a plan file, broken into slices. It's the bridge between thinking and building.
 
 ```
-/inscribe                      # standalone — asks for the feature description
+/ponder  →  /inscribe  →  /forge  →  /temper  →  /seal
 ```
 
-Or auto-invoked by `/ponder` after the grill, which passes resolved inputs (title, goal, constraints, slices).
+## What it does
 
-## Inputs
+1. **Pick a slug.** Kebab-case, derived from the plan title (`auth-flow`, `dark-mode`). Refuse if `.claude/plans/active/<slug>.md` already exists — surface it rather than overwrite.
 
-Inscribe receives resolved design decisions from one of:
-- A completed `/grill-me` or `/ponder` session in this conversation.
-- A direct `/inscribe` invocation where the user describes decisions inline.
+2. **Slice the work.** Break the effort into a handful of coherent slices, each one a chunk you could describe in a sentence. Order them so earlier slices unblock later ones.
 
-You need, at minimum:
+3. **Write the file** to `.claude/plans/active/<slug>.md` in exactly this shape:
 
-- **Title** — short human title for the feature (e.g. "Auth & login").
-- **Goal** — one paragraph describing what shipping this means.
-- **Constraints / out of scope** — what this plan explicitly does not cover. Empty list is acceptable.
-- **Slices** — an ordered list of shippable steps. Each slice carries a one-line title and a body (acceptance criteria, key interfaces, anything the worker needs).
+   ```markdown
+   ---
+   name: <slug>
+   created: <YYYY-MM-DD>
+   status: active
+   ---
 
-If any of these are missing when invoked standalone, ask for them once via AskUserQuestion — but do not interview. If the user has more than one open question, stop and redirect to `/ponder`.
+   # <Title>
 
-## Workflow
+   ## Progress
+   `░░░░░░░░░░` 0/<N>
+   - [ ] 1. <slice 1 title>
+   - [ ] 2. <slice 2 title>
+   - [ ] 3. <slice 3 title>
 
-### 1. Pick a slug
+   ## Goal
+   <what we're building and why; what "done" looks like>
 
-Derive a kebab-case slug from the title:
+   ## Constraints / out of scope
+   <anything deliberately not being done>
 
-- Lowercase, ASCII only.
-- Spaces and underscores → `-`.
-- Strip punctuation.
-- Trim to ~40 chars.
+   ---
 
-Examples:
-- "Auth & login" → `auth-login`
-- "Status chip on list cards" → `status-chip-list-cards`
+   ## Slice 1: <title>
+   <detail and acceptance notes>
 
-### 2. Refuse if the plan already exists
+   ## Slice 2: <title>
+   <detail>
 
-```bash
-[[ -f ".claude/plans/active/<slug>.md" ]] && exit
-```
+   ## Slice 3: <title>
+   <detail>
+   ```
 
-If `.claude/plans/active/<slug>.md` already exists, **stop**. Print:
+   The progress bar starts all `░` (10 cells, `0/<N>`). The checklist mirrors the slice headings exactly.
 
-```
-Plan already exists at .claude/plans/active/<slug>.md.
+4. **Hand off:**
 
-Either pick a different name, or `/rollback` / archive the existing plan first.
-```
+   > Plan written to `.claude/plans/active/<slug>.md`. Run `/forge` to build it.
 
-Do not overwrite. Do not append.
+## Rules
 
-### 3. Render the plan file
-
-Write `.claude/plans/active/<slug>.md` using `Write`. The shape is fixed:
-
-```markdown
----
-name: <slug>
-status: active
-created: <YYYY-MM-DD>
----
-
-# <Title>
-
-## Progress
-░░░░░░░░░░ 0/<N> slices shipped
-- [ ] 1. <slice-1-title>  (queued)
-- [ ] 2. <slice-2-title>  (queued)
-- [ ] 3. <slice-3-title>  (queued)
-
-## Goal
-<goal paragraph>
-
-## Constraints / out of scope
-<constraints>
-
----
-
-## Slice 1: <slice-1-title>
-Status: queued
-Branch: -
-
-<slice-1-body — acceptance criteria, key interfaces, anything the worker needs>
-
-## Slice 2: <slice-2-title>
-Status: queued
-Branch: -
-
-<slice-2-body>
-
-## Slice 3: <slice-3-title>
-Status: queued
-Branch: -
-
-<slice-3-body>
-```
-
-Rules:
-
-- **Progress bar.** Always 10 cells. Shipped slices use `█`; not-yet-shipped use `░`. At inscribe time, the bar is always `░░░░░░░░░░ 0/N slices shipped` where `N` is the slice count.
-- **Slice headers.** Numbered 1..N. Each slice opens with `Status: queued` and `Branch: -` on the two lines right under the heading. These two lines are load-bearing — `/forge-worker` flips them as it builds.
-- **Created date.** Today's date in UTC (`YYYY-MM-DD`).
-- **Status field.** Always `active` at inscribe time. `/seal` flips it to `done` and moves the file under `.claude/plans/done/`.
-- **Empty constraints.** If there are no constraints, write `None — see slice bodies.`. Do not omit the section.
-
-### 4. Print the handoff
-
-After writing the file, print exactly:
-
-```
-Wrote .claude/plans/active/<slug>.md (<N> slices).
-
-  1. <slice-1-title>
-  2. <slice-2-title>
-  ...
-
-Next: /forge
-```
-
-End the session. The user runs `/forge` next.
-
-## Anti-patterns
-
-- **Don't grill.** Inscribe writes up resolved decisions. If you're tempted to ask a design question, hand back to `/ponder`.
-- **Don't overwrite an existing plan.** Refuse the run instead. The plan file is the source of truth — clobbering it loses worker progress.
-- **Don't file GitHub issues.** Lite has no issues. The plan file is the issue.
-- **Don't run `/forge` from inside inscribe.** Phases are session-scoped per the Lite contract. End the session, hand off.
-- **Don't omit `Status:` / `Branch:` lines on slices.** `/forge-worker` reads them; they are not decorative.
-- **Don't change the progress-bar width.** 10 cells, always.
+- **One file per plan.** Everything lives in the single markdown file — no side files, no issues, no PRs.
+- **Slices are the unit.** The top checklist and the `## Slice N:` sections must stay in sync (same count, same titles).
+- **Don't overwrite.** If the slug exists, stop and tell the operator.
+- **No code.** `/inscribe` writes the plan; `/forge` builds it.

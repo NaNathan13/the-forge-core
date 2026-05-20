@@ -1,64 +1,63 @@
 # The Forge Lite
 
-A stripped-down workflow pipeline for Claude Code projects. Four phases — **Ponder → Forge → Temper → Seal** — driven by markdown plan files on disk. No GitHub issues, no PRs as work units, no Mission Control file, no concurrent workers. Just one operator command per phase, one slice at a time.
+<!-- working title — project rename pending -->
 
-This repo is both the source-of-truth for the pipeline AND a working dogfood project. To use Lite in another project, run `./light-the-lite.sh /path/to/target`.
-
-## The loop
+A lightweight four-phase workflow for Claude Code projects. Think of it as the bones of a bigger pipeline with all the machinery stripped out: just five skills, plan files on disk, and your own session doing the work.
 
 ```
-/ponder   → grills the idea, writes .claude/plans/active/<slug>.md
-/forge    → builds one slice on its own branch
-/temper   → reviews the diff + intent-match, marks ready-for-seal or friction
-/seal     → squash-merges into main, updates progress, archives drained plans
+/ponder    → grill the idea into shared understanding
+/inscribe  → write the plan to .claude/plans/active/<slug>.md, sliced into parts
+/forge     → build the whole plan inline, ticking off slices
+/temper    → review + harden what was built; send weak slices back
+/seal      → confirm done, move the plan to .claude/plans/done/
 ```
 
-State lives entirely in `.claude/plans/active/*.md` (in-flight) and `.claude/plans/done/*.md` (shipped). `ls active/` is your in-flight ledger.
+No GitHub issues, no PRs, no orchestrators, no subagents, no token accounting. Git is just local version control. State lives entirely in `.claude/plans/` — `ls active/` is your whole ledger.
 
 ## Plan-file shape
 
 ```markdown
 ---
 name: auth-flow
-status: active
 created: 2026-05-19
+status: active
 ---
 
 # Auth flow
 
 ## Progress
-░░░░░░░░░░ 0/3 slices shipped
-- [ ] 1. Add login form  (queued)
-- [ ] 2. Wire auth API   (queued)
-- [ ] 3. Session refresh (queued)
+`███░░░░░░░` 1/3
+- [x] 1. Add login form
+- [ ] 2. Wire auth API
+- [ ] 3. Session refresh
 
 ## Goal
-<why this exists, what done looks like>
+What we're building and why.
 
 ---
 
 ## Slice 1: Add login form
-Status: queued
-Branch: -
+Detail and acceptance notes.
 
-<acceptance criteria, implementation notes>
+## Slice 2: Wire auth API
+...
 ```
 
-## Installing into another project
+## Skills
+
+- **ponder** · **inscribe** · **forge** · **temper** · **seal** — the workflow.
+- **grill-me** — stress-test an idea (used by `/ponder`).
+- **diagnose** — disciplined debugging loop (handy in `/temper`).
+
+## Using it in another project
 
 ```
 cd /path/to/your/project
-/path/to/the-forge-lite/light-the-lite.sh
+/path/to/this-repo/light-the-lite.sh
 ```
 
-The installer copies `.claude/skills/`, scaffolds `.claude/plans/{active,done}/`, drops placeholder `CLAUDE.md` / `CONTEXT.md` / `README.md` (only if missing — never overwrites), and prints a "next: `/ponder`" recommendation.
+Copies the skills, scaffolds `.claude/plans/{active,done}/`, and drops placeholder `CLAUDE.md` / `CONTEXT.md` / `README.md` (only if missing — never overwrites). Then run `/ponder`.
 
-## Comparison to The Forge
+## How it differs from the full pipeline it came from
 
-Full Forge adds: GitHub issue tracking, labels, PR-as-review-surface, Mission Control ledger, concurrent worker dispatch, multiple ADRs. Lite drops all of that. Choose Lite when:
-
-- You don't want GitHub coupling.
-- You're working solo and don't need parallel slices.
-- You want the discipline of the four phases without the ceremony.
-
-Choose full Forge when: you need PR review with reviewers other than yourself, you want GitHub Actions CI in the loop, or you want concurrent slice builds.
+The parent ("The Forge") adds GitHub issues + PRs, labels, a Mission Control ledger, an orchestrator/worker split with subagent dispatch, worktree isolation, and token accounting. This version drops all of it. Reach for it when you're working solo, want the discipline of the four phases, and don't want any of the ceremony.

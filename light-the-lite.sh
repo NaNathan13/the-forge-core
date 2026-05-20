@@ -6,7 +6,7 @@
 #   ./light-the-lite.sh <target-dir>    # install into the named dir
 #
 # What it copies:
-#   .claude/skills/         — all skills (keepers + phase + worker + supporting)
+#   .claude/skills/         — all skills (the five phases + grill-me + diagnose)
 #   .claude/plans/{active,done}/ — empty plan dirs (with .gitkeep)
 #   .claude/settings.json   — starter allowlist (only if missing in target)
 #   templates/CLAUDE.md     → target/CLAUDE.md  (only if missing)
@@ -143,5 +143,5 @@ echo
 printf '%s%s%s\n' "$DIM" "  Target:        $TARGET" "$N"
 printf '%s%s%s\n' "$DIM" "  Plans live in: $TARGET/.claude/plans/active/" "$N"
 echo
-echo "  Next: /ponder        (or /prototype for fast-path single-slice work)"
+echo "  Next: /ponder"
 echo

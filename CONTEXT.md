@@ -1,33 +1,35 @@
-# CONTEXT — The Forge Lite glossary
+# CONTEXT — glossary
 
-Single source of truth for terms used by the pipeline. Living docs in this repo anchor-link to `CONTEXT.md#<term>` rather than re-defining.
+Single source of truth for the terms the workflow uses.
 
 ## Ponder
 
-The first phase. The operator runs `/ponder`, gets grilled on the idea by the `grill-me` sub-skill, then `/inscribe` writes a plan file to `.claude/plans/active/<slug>.md` with one or more queued slices.
+The thinking phase. `/ponder` grills a fuzzy idea into shared understanding — scope, the shape of "done", how the work splits into slices — without writing any code or plan file. Hands off to `/inscribe`.
+
+## Inscribe
+
+The plan-writing phase. `/inscribe` records the understanding from `/ponder` as a single markdown file at `.claude/plans/active/<slug>.md`, sliced into parts, with a progress block near the top. The bridge between thinking and building.
 
 ## Forge
 
-The second phase. The operator runs `/forge`. The orchestrator picks the most-recently-modified active plan (or an arg-named one), finds the first slice with `Status: queued` or `Status: friction`, creates a branch (`feat/<plan-slug>-s<N>-<desc>`), and dispatches a builder subagent (worktree-isolated) that writes the code and commits to the branch. The orchestrator then flips the slice to `Status: ready-for-temper`. **No merge** — that's `/seal`'s job.
+The build phase. `/forge` reads the active plan and works through every unchecked slice inline — implementing each, ticking its box, re-rendering the progress bar — then commits. No branches, no subagents; the work happens in this session on the current branch.
 
 ## Temper
 
-The third phase. The operator runs `/temper`. The orchestrator picks the first slice with `Status: ready-for-temper`, dispatches a reviewer subagent on `git diff main..<branch>`, runs an inline intent-match against the slice body, and applies the **strict friction rule**: any reviewer HIGH OR intent-match failure → `Status: friction` + a `### Friction` subsection appended under the slice. Otherwise → `Status: ready-for-seal`.
+The review-and-harden phase. `/temper` checks the built work against the plan: does each slice actually meet its intent, is it correct and clean. It fixes small issues inline and sends weak slices back by un-ticking them and annotating what's missing. Commits any fixes.
 
 ## Seal
 
-The fourth phase. The operator runs `/seal`. The orchestrator picks the first slice with `Status: ready-for-seal`, squash-merges the branch into `main`, deletes the branch, flips the slice to `Status: shipped`, re-renders the progress bar at the top of the plan, and — if every slice in the plan is now shipped — moves the file from `.claude/plans/active/` to `.claude/plans/done/`.
-
-## Slice
-
-A single H2 section (`## Slice N: <title>`) inside a plan file. The atomic unit of work. Each slice carries a `Status:` line and a `Branch:` line right under the heading, then its body (acceptance criteria, implementation notes). Slices in a single plan can be related but each gets its own branch and its own forge/temper/seal cycle.
-
-**Status values:** `queued` → `ready-for-temper` → (`ready-for-seal` | `friction`) → `shipped`. A `friction` slice goes back through `/forge` for rework; the `### Friction` subsection under it is the rework brief.
+The closer phase. `/seal` confirms every slice is done, flips the plan's frontmatter to `status: done`, moves the file from `.claude/plans/active/` to `.claude/plans/done/`, and makes a final commit.
 
 ## Plan
 
-A single markdown file at `.claude/plans/active/<slug>.md` (in-flight) or `.claude/plans/done/<slug>.md` (drained). Contains YAML frontmatter (`name`, `status`, `created`), a `## Progress` block with a 10-cell progress bar (█ for shipped, ░ for not), a `## Goal` section, optional `## Constraints / out of scope`, and 1..N `## Slice N: ...` sections.
+A single markdown file at `.claude/plans/active/<slug>.md` (in-flight) or `.claude/plans/done/<slug>.md` (finished). Holds frontmatter (`name`, `created`, `status`), a `## Progress` block (a 10-cell bar + a slice checklist), a `## Goal`, optional `## Constraints / out of scope`, and one `## Slice N:` section per slice.
 
-## Friction
+## Slice
 
-The first-class "stuck" signal. When `/temper` fails a slice (any reviewer HIGH or intent-mismatch), the slice's `Status:` becomes `friction` and a `### Friction` subsection is appended under the slice with the reviewer findings, intent-match notes, and a timestamp. The next `/forge` invocation on that slice reads the subsection as "here's what to fix".
+One coherent chunk of a plan — something you could describe in a sentence. Appears twice in the plan file: as a checklist item in the progress block (`- [ ]` / `- [x]`) and as a `## Slice N:` detail section. `/forge` builds slices and ticks them; `/temper` un-ticks any that need rework.
+
+## Progress block
+
+The bit near the top of every plan: a 10-cell bar (`█` done, `░` not — filled cells = `round(done / total × 10)`) plus the slice checklist. The single source of truth for what's done; kept current by `/forge` and `/temper`.
