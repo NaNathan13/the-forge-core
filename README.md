@@ -10,9 +10,29 @@ Temper ── /temper    review + harden what was built; send weak slices back
 Seal ──── /seal      confirm done, move the plan to .claude/plans/done/
 ```
 
-The four phases are Ponder, Forge, Temper, Seal. The Ponder phase runs two commands — `/ponder` to think, `/inscribe` to write the plan — so there are five skills in all.
+The four phases are Ponder, Forge, Temper, Seal. The Ponder phase runs two commands — `/ponder` to think, `/inscribe` to write the plan — so the four phases map to five commands.
 
 No GitHub issues, no PRs, no orchestrators, no subagents, no token accounting. Git is just local version control. State lives entirely in `.claude/plans/` — `ls active/` is your whole ledger.
+
+## How to get started
+
+The Forge Core drops into any project with one script — `light-the-core.sh`.
+
+```bash
+# 1. Get The Forge Core
+git clone https://github.com/NaNathan13/the-forge-core.git
+
+# 2. Install it into your project
+cd /path/to/your/project
+/path/to/the-forge-core/light-the-core.sh
+
+# 3. Open the project in Claude Code and run the first phase
+/ponder
+```
+
+`light-the-core.sh` copies the skills into `.claude/skills/`, scaffolds `.claude/plans/{active,done}/`, and drops starter `CLAUDE.md` / `CONTEXT.md` / `README.md` — only if you don't already have them; it never overwrites your docs. It refuses to run if the project already has `.claude/plans/` (so you can't clobber an existing install).
+
+**Prefer to set it up from inside Claude?** Run the `/light-the-core` skill instead of the bare script. It runs the same installer, then asks three quick questions — project name, a one-line description, and your tech stack (including the check command `/forge` and `/temper` will run) — and fills the starter docs in for you.
 
 ## Plan-file shape
 
@@ -50,15 +70,6 @@ Detail and acceptance notes.
 - **grill-me** — stress-test an idea (used by `/ponder`).
 - **diagnose** — disciplined debugging loop (handy in `/temper`).
 - **scrub** — tidy up: reconcile plan-state drift, re-render stale progress bars, sweep junk.
-
-## Using it in another project
-
-```
-cd /path/to/your/project
-/path/to/this-repo/light-the-core.sh
-```
-
-Copies the skills, scaffolds `.claude/plans/{active,done}/`, and drops placeholder `CLAUDE.md` / `CONTEXT.md` / `README.md` (only if missing — never overwrites). Then run `/ponder`.
 
 ## How it differs from the full pipeline it came from
 
