@@ -14,6 +14,8 @@ The four phases are Ponder, Forge, Temper, Seal. The Ponder phase runs two comma
 
 No GitHub issues, no PRs, no orchestrators, no subagents, no token accounting. Git is just local version control. State lives entirely in `.claude/plans/` — `ls active/` is your whole ledger.
 
+> **New here?** [**How to work in The Forge Core**](how-to-work-in-the-forge.md) walks a first-time user through the whole loop — where the workflow lives, where your app lives, and exactly what to type at each phase.
+
 ## How to get started
 
 From your project directory, run the installer. It fetches The Forge Core and installs it in **one step** — no separate clone:
