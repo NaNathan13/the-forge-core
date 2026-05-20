@@ -1,18 +1,20 @@
 # The Forge Core
 
-A lightweight four-phase workflow for Claude Code projects: **Ponder → Inscribe → Forge → Temper → Seal**. All planning and progress lives in markdown plan files under `.claude/plans/` — `active/` for in-flight work, `done/` for finished. No GitHub issues, no PRs, no orchestration, no subagents. One simple workflow you run inline.
+A lightweight four-phase workflow for Claude Code projects: **Ponder → Forge → Temper → Seal**. All planning and progress lives in markdown plan files under `.claude/plans/` — `active/` for in-flight work, `done/` for finished. No GitHub issues, no PRs, no orchestration, no subagents. One simple workflow you run inline.
 
 This repo is both the working source of the workflow AND something you can drop into any project (via the install script).
 
 ## The loop
 
 ```
-/ponder    → grill the idea into shared understanding
-/inscribe  → write the plan to .claude/plans/active/<slug>.md, sliced into parts
-/forge     → build the whole plan inline, ticking off slices
-/temper    → review + harden what was built; send weak slices back
-/seal      → confirm done, move the plan to .claude/plans/done/
+Ponder ─┬ /ponder    grill the idea into shared understanding
+        └ /inscribe  write the sliced plan to .claude/plans/active/<slug>.md
+Forge ─── /forge     build the whole plan inline, ticking off slices
+Temper ── /temper    review + harden what was built; send weak slices back
+Seal ──── /seal      confirm done, move the plan to .claude/plans/done/
 ```
+
+Four phases. The Ponder phase runs two commands (`/ponder` then `/inscribe`); the rest are one each.
 
 State = `ls .claude/plans/active/`. That's the whole ledger.
 
@@ -28,7 +30,7 @@ See [`CONTEXT.md`](./CONTEXT.md). The essentials:
 
 - **Plan** — one markdown file in `.claude/plans/active/<slug>.md`, sliced into parts, with a progress block near the top.
 - **Slice** — one coherent chunk of a plan; a checklist item plus a `## Slice N:` detail section.
-- **The four phases** — Ponder (think), Forge (build), Temper (review), Seal (finish). `/inscribe` bridges Ponder and Forge by writing the plan.
+- **The four phases** — Ponder (think), Forge (build), Temper (review), Seal (finish). The Ponder phase ends with `/inscribe`, which writes the sliced plan.
 
 ## Rules
 

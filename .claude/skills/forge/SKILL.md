@@ -8,7 +8,7 @@ description: Phase 2 of the workflow — build the active plan. Works through ev
 `/forge` is the **build phase**. It reads the active plan and works through its slices, implementing each one and ticking it off. It runs inline in this session — no subagents, no branches.
 
 ```
-/ponder  →  /inscribe  →  /forge  →  /temper  →  /seal
+Ponder → Forge → Temper → Seal      (the Ponder phase = /ponder then /inscribe)
 ```
 
 ## What it does

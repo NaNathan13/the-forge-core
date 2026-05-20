@@ -17,14 +17,14 @@ One-line description of what this project is.
 
 ## How work flows here
 
-Five skills, run inline, in order. State lives in `.claude/plans/` — `active/` for in-flight, `done/` for finished.
+Four phases, run inline, in order. State lives in `.claude/plans/` — `active/` for in-flight, `done/` for finished.
 
 ```
-/ponder    → grill the idea into shared understanding
-/inscribe  → write the plan to .claude/plans/active/<slug>.md, sliced into parts
-/forge     → build the whole plan inline, ticking off slices
-/temper    → review + harden what was built; send weak slices back
-/seal      → confirm done, move the plan to .claude/plans/done/
+Ponder ─┬ /ponder    grill the idea into shared understanding
+        └ /inscribe  write the sliced plan to .claude/plans/active/<slug>.md
+Forge ─── /forge     build the whole plan inline, ticking off slices
+Temper ── /temper    review + harden what was built; send weak slices back
+Seal ──── /seal      confirm done, move the plan to .claude/plans/done/
 ```
 
 No GitHub issues, no PRs, no subagents. `ls .claude/plans/active/` is the whole ledger.

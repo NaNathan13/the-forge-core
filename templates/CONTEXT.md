@@ -10,9 +10,9 @@
 
 ## Workflow terms
 
-**Ponder**: The thinking phase. Grill a fuzzy idea into shared understanding — scope, "done", how the work splits into slices — without writing code or a plan. Hands off to Inscribe.
+**Ponder**: The thinking phase — first of the four. Grill a fuzzy idea into shared understanding — scope, "done", how the work splits into slices — without writing code or a plan. Ends by handing off to Inscribe.
 
-**Inscribe**: The plan-writing phase. Records the understanding as a single markdown file at `.claude/plans/active/<slug>.md`, sliced into parts, with a progress block near the top.
+**Inscribe**: The plan-writing step that ends the Ponder phase (a command, not a phase of its own). Records the understanding as a single markdown file at `.claude/plans/active/<slug>.md`, sliced into parts, with a progress block near the top.
 
 **Forge**: The build phase. Reads the active plan and works through every unchecked slice inline — implementing each, ticking its box, re-rendering the progress bar — then commits. No branches, no subagents.
 

@@ -4,11 +4,11 @@ Single source of truth for the terms the workflow uses.
 
 ## Ponder
 
-The thinking phase. `/ponder` grills a fuzzy idea into shared understanding — scope, the shape of "done", how the work splits into slices — without writing any code or plan file. Hands off to `/inscribe`.
+The thinking phase — first of the four. `/ponder` grills a fuzzy idea into shared understanding — scope, the shape of "done", how the work splits into slices — without writing any code or plan file. It ends by handing off to `/inscribe`.
 
 ## Inscribe
 
-The plan-writing phase. `/inscribe` records the understanding from `/ponder` as a single markdown file at `.claude/plans/active/<slug>.md`, sliced into parts, with a progress block near the top. The bridge between thinking and building.
+The plan-writing step that ends the Ponder phase (a command, not a phase of its own). `/inscribe` records the understanding from `/ponder` as a single markdown file at `.claude/plans/active/<slug>.md`, sliced into parts, with a progress block near the top.
 
 ## Forge
 

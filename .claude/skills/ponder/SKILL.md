@@ -8,7 +8,7 @@ description: Phase 1 of the workflow — turn a fuzzy idea into shared understan
 `/ponder` is the **planning phase**. Its job is to turn a fuzzy idea into a clear, agreed shape — *before* any plan file is written. It does not write code and does not write the plan; that's `/inscribe`.
 
 ```
-/ponder  →  /inscribe  →  /forge  →  /temper  →  /seal
+Ponder → Forge → Temper → Seal      (the Ponder phase = /ponder then /inscribe)
 ```
 
 ## What it does

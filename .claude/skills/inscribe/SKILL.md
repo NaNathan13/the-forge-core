@@ -8,7 +8,7 @@ description: Write the plan file from resolved /ponder decisions and slice it in
 `/inscribe` records the understanding reached in `/ponder` as a plan file, broken into slices. It's the bridge between thinking and building.
 
 ```
-/ponder  →  /inscribe  →  /forge  →  /temper  →  /seal
+Ponder → Forge → Temper → Seal      (the Ponder phase = /ponder then /inscribe)
 ```
 
 ## What it does

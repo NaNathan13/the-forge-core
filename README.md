@@ -1,14 +1,16 @@
 # The Forge Core
 
-A lightweight four-phase workflow for Claude Code projects. Think of it as the bones of a bigger pipeline with all the machinery stripped out: just five skills, plan files on disk, and your own session doing the work.
+A lightweight four-phase workflow for Claude Code projects — **Ponder → Forge → Temper → Seal**. Think of it as the bones of a bigger pipeline with all the machinery stripped out: a few small skills, plan files on disk, and your own session doing the work.
 
 ```
-/ponder    → grill the idea into shared understanding
-/inscribe  → write the plan to .claude/plans/active/<slug>.md, sliced into parts
-/forge     → build the whole plan inline, ticking off slices
-/temper    → review + harden what was built; send weak slices back
-/seal      → confirm done, move the plan to .claude/plans/done/
+Ponder ─┬ /ponder    grill the idea into shared understanding
+        └ /inscribe  write the sliced plan to .claude/plans/active/<slug>.md
+Forge ─── /forge     build the whole plan inline, ticking off slices
+Temper ── /temper    review + harden what was built; send weak slices back
+Seal ──── /seal      confirm done, move the plan to .claude/plans/done/
 ```
+
+The four phases are Ponder, Forge, Temper, Seal. The Ponder phase runs two commands — `/ponder` to think, `/inscribe` to write the plan — so there are five skills in all.
 
 No GitHub issues, no PRs, no orchestrators, no subagents, no token accounting. Git is just local version control. State lives entirely in `.claude/plans/` — `ls active/` is your whole ledger.
 
@@ -43,7 +45,8 @@ Detail and acceptance notes.
 
 ## Skills
 
-- **ponder** · **inscribe** · **forge** · **temper** · **seal** — the workflow.
+- **ponder** + **inscribe** — the Ponder phase: think it through, then write the sliced plan.
+- **forge** · **temper** · **seal** — build, review/harden, finish.
 - **grill-me** — stress-test an idea (used by `/ponder`).
 - **diagnose** — disciplined debugging loop (handy in `/temper`).
 
