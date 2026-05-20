@@ -1,6 +1,4 @@
-# The Forge Lite
-
-<!-- working title — project rename pending -->
+# The Forge Core
 
 A lightweight four-phase workflow for Claude Code projects: **Ponder → Inscribe → Forge → Temper → Seal**. All planning and progress lives in markdown plan files under `.claude/plans/` — `active/` for in-flight work, `done/` for finished. No GitHub issues, no PRs, no orchestration, no subagents. One simple workflow you run inline.
 

@@ -1,6 +1,4 @@
-# The Forge Lite
-
-<!-- working title — project rename pending -->
+# The Forge Core
 
 A lightweight four-phase workflow for Claude Code projects. Think of it as the bones of a bigger pipeline with all the machinery stripped out: just five skills, plan files on disk, and your own session doing the work.
 
@@ -53,7 +51,7 @@ Detail and acceptance notes.
 
 ```
 cd /path/to/your/project
-/path/to/this-repo/light-the-lite.sh
+/path/to/this-repo/light-the-core.sh
 ```
 
 Copies the skills, scaffolds `.claude/plans/{active,done}/`, and drops placeholder `CLAUDE.md` / `CONTEXT.md` / `README.md` (only if missing — never overwrites). Then run `/ponder`.

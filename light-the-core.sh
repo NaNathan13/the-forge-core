@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# light-the-lite.sh — copy The Forge Lite skeleton into a target project.
+# light-the-core.sh — copy The Forge Core skeleton into a target project.
 #
 # Usage:
-#   ./light-the-lite.sh                 # install into current working dir
-#   ./light-the-lite.sh <target-dir>    # install into the named dir
+#   ./light-the-core.sh                 # install into current working dir
+#   ./light-the-core.sh <target-dir>    # install into the named dir
 #
 # What it copies:
 #   .claude/skills/         — all skills (the five phases + grill-me + diagnose)
@@ -13,7 +13,7 @@
 #   templates/CONTEXT.md    → target/CONTEXT.md (only if missing)
 #   templates/README.md     → target/README.md  (only if missing)
 #
-# Refuses if target already has .claude/plans/ (Lite is already installed).
+# Refuses if target already has .claude/plans/ (Core is already installed).
 
 set -euo pipefail
 
@@ -55,23 +55,23 @@ bold()   { printf '%s%s%s\n' "$BOLD" "$*" "$N"; }
 # ─── preflight ───────────────────────────────────────────────────────────────
 if [[ "$SRC" == "$TARGET" ]]; then
   red "✗ Source and target are the same directory ($SRC)."
-  echo "  Run light-the-lite.sh from outside the Lite repo, or pass a different target." >&2
+  echo "  Run light-the-core.sh from outside the Core repo, or pass a different target." >&2
   exit 1
 fi
 
 if [[ -d "$TARGET/.claude/plans" ]]; then
-  red "✗ Target already has .claude/plans/ — Lite appears to be installed."
+  red "✗ Target already has .claude/plans/ — Core appears to be installed."
   echo "  Path: $TARGET/.claude/plans" >&2
   echo "  Remove it (or its parent) manually to re-install." >&2
   exit 1
 fi
 
 # ─── copy skills ─────────────────────────────────────────────────────────────
-bold "Installing The Forge Lite into:"
+bold "Installing The Forge Core into:"
 printf '  %s\n\n' "$TARGET"
 
 if [[ ! -d "$SRC/.claude/skills" ]]; then
-  red "✗ Source missing .claude/skills/ — is this actually the Lite repo? ($SRC)"
+  red "✗ Source missing .claude/skills/ — is this actually the Core repo? ($SRC)"
   exit 1
 fi
 
