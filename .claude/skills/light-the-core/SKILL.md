@@ -69,7 +69,7 @@ If the script exited non-zero (target already has `.claude/plans/`, target doesn
 
 ## Anti-patterns
 
-- **Don't inline the file-copy logic.** That's `light-the-core.sh`'s job. This skill orchestrates; it does not duplicate the script.
+- **Don't inline the file-copy logic.** That's `light-the-core.sh`'s job. This skill just runs the script; it does not duplicate it.
 - **Don't run a Q&A like `/light-the-forge` does.** Core has no project name, no tech stack, no GitHub repo creation to ask about. One confirmation, that's it.
 - **Don't overwrite the user's `CLAUDE.md` / `CONTEXT.md` / `README.md`.** The installer already declines to clobber existing root docs; never paper over that.
 - **Don't `git init` or create a GitHub repo.** Core is plan-files-on-disk; remote setup is the user's call.
