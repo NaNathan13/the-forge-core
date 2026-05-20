@@ -80,6 +80,7 @@ Type `/seal`. Claude confirms every slice is done, makes the final commit, and m
 - **`/grill-me`** — stress-test any idea or plan with relentless one-at-a-time questions. (`/ponder` uses this under the hood.)
 - **`/diagnose`** — a disciplined debugging loop when something's broken and the cause isn't obvious.
 - **`/scrub`** — tidy up: reconcile plan state, re-render a stale progress bar, sweep junk. Run it when things feel cluttered.
+- **`/sharpen`** — turn a rough idea into a precise prompt. Write out what you want, run `/sharpen`, and get back a tightened prompt ready to paste into a new session, an agent, or `/ponder`.
 
 ## House rules
 

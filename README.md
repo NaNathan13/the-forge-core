@@ -69,6 +69,7 @@ Detail and acceptance notes.
 - **grill-me** — stress-test an idea (used by `/ponder`).
 - **diagnose** — disciplined debugging loop (handy in `/temper`).
 - **scrub** — tidy up: reconcile plan-state drift, re-render stale progress bars, sweep junk.
+- **sharpen** — turn a rough idea into a precise, well-formed prompt for any session, agent, or tool.
 
 ## How it differs from the full pipeline it came from
 
