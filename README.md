@@ -1,76 +1,39 @@
 # The Forge Core
 
-A lightweight four-phase workflow for Claude Code projects — **Ponder → Forge → Temper → Seal**. Think of it as the bones of a bigger pipeline with all the machinery stripped out: a few small skills, plan files on disk, and your own session doing the work.
+A calm, four-phase way to build things with Claude Code — **Ponder → Forge → Temper → Seal**. A few small skills, plans kept as plain markdown on disk, and your own session doing the work. No issues, no PRs, no orchestration — just the steadiness of the four phases.
 
-```
-Ponder ─┬ /ponder    grill the idea into shared understanding
-        └ /inscribe  write the sliced plan to .claude/plans/active/<slug>.md
-Forge ─── /forge     build the whole plan inline, ticking off slices
-Temper ── /temper    review + harden what was built; send weak slices back
-Seal ──── /seal      confirm done, move the plan to .claude/plans/done/
-```
+It's also the brain behind [The Forge GUI](../the-forge-gui): the no-terminal app installs these skills into every project it builds.
 
-The four phases are Ponder, Forge, Temper, Seal. The Ponder phase runs two commands — `/ponder` to think, `/inscribe` to write the plan — so the four phases map to five commands.
+## Get started
 
-No GitHub issues, no PRs, no orchestrators, no subagents, no token accounting. Git is just local version control. State lives entirely in `.claude/plans/` — `ls active/` is your whole ledger.
-
-> **New here?** [**How to work in The Forge Core**](how-to-work-in-the-forge.md) walks a first-time user through the whole loop — where the workflow lives, where your app lives, and exactly what to type at each phase.
-
-## How to get started
-
-From your project directory, run the installer. It fetches The Forge Core and installs it in **one step** — no separate clone:
+From your project folder, run the installer (it fetches and installs in one step):
 
 ```bash
-cd /path/to/your/project
 curl -fsSL https://raw.githubusercontent.com/NaNathan13/the-forge-core/main/light-the-core.sh | bash
 ```
 
-Then open the project in Claude Code and run `/ponder`.
+Then open the project in Claude Code and type `/ponder`. That's the whole start.
 
-The installer copies the skills into `.claude/skills/`, scaffolds `.claude/plans/{active,done}/`, and drops starter `CLAUDE.md` / `CONTEXT.md` / `README.md` — only if you don't already have them; it never overwrites your docs. It refuses to run if the project already has `.claude/plans/` (so you can't clobber an existing install).
+The installer adds the skills under `.claude/`, sets up `plans/{active,done}/`, and drops starter `CLAUDE.md` / `CONTEXT.md` / `README.md` — only if you don't already have them, so it never clobbers your docs. **New here?** [**How to work in The Forge**](how-to-work-in-the-forge.md) walks you through your first build.
 
-> Already have the repo cloned? Run `./light-the-core.sh /path/to/your/project` instead — same result, no fetch.
+> Prefer to set it up from inside Claude? Run the `/light-the-core` skill — same installer, and it asks three quick questions (project name, what it is, tech stack) to fill the starter docs in for you.
 
-**Prefer to set it up from inside Claude?** Run the `/light-the-core` skill instead of the one-liner. It runs the same installer, then asks three quick questions — project name, a one-line description, and your tech stack (including the check command `/forge` and `/temper` will run) — and fills the starter docs in for you.
+## The five commands
 
-## Plan-file shape
+Four phases, run as five commands, one at a time — nothing auto-chains, so you're always in control of when the next step starts.
 
-```markdown
----
-name: auth-flow
-created: 2026-05-19
-status: active
----
+| Command | Phase | What it does |
+|---|---|---|
+| `/ponder` | Ponder | Asks a few plain questions to think the idea through — no code yet |
+| `/inscribe` | Ponder | Writes the plan to `.claude/plans/active/<slug>.md` |
+| `/forge` | Forge | Builds the plan slice by slice, ticking each off |
+| `/temper` | Temper | Reviews and hardens it; sends weak slices back to forge |
+| `/seal` | Seal | Confirms it's done and files the plan under `done/` |
 
-# Auth flow
+Reach for these anytime: `/grill-me` (stress-test an idea), `/diagnose` (a calm debugging loop), `/scrub` (tidy up plan state), `/sharpen` (turn a rough idea into a sharp prompt).
 
-## Progress
-`███░░░░░░░` 1/3
-- [x] 1. Add login form
-- [ ] 2. Wire auth API
-- [ ] 3. Session refresh
+## Edit here when…
 
-## Goal
-What we're building and why.
+…you're changing how apps get **built** — the intake questions, how work is planned and sliced, how data is stored, or the rules generated apps follow. The look of the no-terminal app — its preview, gallery, and chrome — lives over in [The Forge GUI](../the-forge-gui).
 
----
-
-## Slice 1: Add login form
-Detail and acceptance notes.
-
-## Slice 2: Wire auth API
-...
-```
-
-## Skills
-
-- **ponder** + **inscribe** — the Ponder phase: think it through, then write the sliced plan.
-- **forge** · **temper** · **seal** — build, review/harden, finish.
-- **grill-me** — stress-test an idea (used by `/ponder`).
-- **diagnose** — disciplined debugging loop (handy in `/temper`).
-- **scrub** — tidy up: reconcile plan-state drift, re-render stale progress bars, sweep junk.
-- **sharpen** — turn a rough idea into a precise, well-formed prompt for any session, agent, or tool.
-
-## How it differs from the full pipeline it came from
-
-The parent ("The Forge") adds GitHub issues + PRs, labels, a Mission Control ledger, an orchestrator/worker split with subagent dispatch, worktree isolation, and token accounting. This version drops all of it. Reach for it when you're working solo, want the discipline of the four phases, and don't want any of the ceremony.
+State is just files: `ls .claude/plans/active/` is your whole ledger.
