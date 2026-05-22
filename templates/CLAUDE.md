@@ -36,6 +36,19 @@ No GitHub issues, no PRs, no subagents. `ls .claude/plans/active/` is the whole 
 - **Stay in scope.** Build what the slices describe; don't add features or refactor beyond them.
 - <placeholder: any project-specific hard rules — code style, paid services, etc.>
 
+## Building apps people will rely on
+
+This is an app for a real person — usually not a programmer — who will use it to get something done. Two rules outweigh everything else:
+
+**1. Never lose their data.** If the app keeps information the user will expect to find later — clients, notes, inventory, bookings, logs, anything they enter and would be upset to lose — that information MUST be saved in durable, server-side storage, never in the browser. Browser storage (`localStorage`, `sessionStorage`, IndexedDB) is per-browser, per-device, and easily wiped; treat it as throwaway only.
+- **Default — a tiny built-in server + a data file.** Build one small Node program using only built-ins (`http`, `fs`) — no framework, and avoid `npm install` — that serves the page AND a small JSON API, and saves records to a JSON file on disk in the project (e.g. `data.json`). Durable, survives restarts, no database, right for typical office-scale record-keeping.
+- **SQLite** (Node's built-in `node:sqlite`, still no native dependency) instead of a JSON file ONLY when the data is large, relational, or needs real search/queries.
+- **Throwaway / compute-only tools** (calculator, converter, timer, one-off generator) keep no records — a single static page is correct; do NOT add a server.
+
+**2. One process, one port.** An app that needs a server runs as a single Node process started by `npm start` (i.e. a `start` script = `node server.js`), listening on `process.env.PORT` (with a sensible fallback when unset), serving both the UI and its API on that one port, and logging its address (e.g. `http://localhost:<port>`) once it's listening. No build step, no second dev server, no framework unless the plan explicitly requires one — this keeps it reliable to launch and to preview.
+
+**Sharing.** Just one person on one computer → the local file store above is perfect. Shared by several people in an office → bind the server to `0.0.0.0` on its port so others on the same network reach it at `http://<this-computer>:<port>`; the data still lives in one place on the host. No accounts, no cloud.
+
 ## Docs
 
 - [`CONTEXT.md`](./CONTEXT.md) — glossary. Read reactively when a term is unclear.

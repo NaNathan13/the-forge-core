@@ -24,7 +24,7 @@ Ponder → Forge → Temper → Seal      (the Ponder phase = /ponder then /insc
 
 2. **Build each unchecked slice, in order.** For every `- [ ]` slice in the progress block:
    - Implement it per its `## Slice N:` section. Keep edits scoped to that slice.
-   - When it's done, tick its box (`- [ ]` → `- [x]`) and re-render the progress bar: filled cells = `round(done / total × 10)`, `█` filled, `░` empty.
+   - The moment a slice is done, **save the plan file** with its box ticked (`- [ ]` → `- [x]`) and the progress bar re-rendered (filled cells = `round(done / total × 10)`, `█` filled, `░` empty) — do this immediately, before starting the next slice, so progress is visible as the build happens, not just at the end.
    - If a slice is genuinely blocked, leave it unchecked, add a one-line `> blocked: <why>` note under it, and move on (or stop if later slices depend on it).
 
 3. **Commit.** Once you've worked through what you can, commit on the current branch:
@@ -44,7 +44,7 @@ Ponder → Forge → Temper → Seal      (the Ponder phase = /ponder then /insc
 ## Rules
 
 - **Whole plan in one pass.** `/forge` attempts every unchecked slice, not just the next one.
-- **Tick as you go.** The progress block is the source of truth — keep it current so a re-run knows what's left.
+- **Tick as you go.** The progress block is the source of truth — update and save it after *each* slice (not in a batch at the end) so a re-run, and anyone watching, always sees exactly what's done.
 - **Work in place.** No branches, no GitHub, no push. Commit at the end.
 - **Stay in scope.** Build what the slices describe; don't add features or refactor beyond them.
 - **No review here.** `/temper` checks the work. `/forge` just builds.
