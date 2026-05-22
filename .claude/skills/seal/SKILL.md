@@ -20,6 +20,7 @@ Ponder → Forge → Temper → Seal      (the Ponder phase = /ponder then /insc
    > Plan `<slug>` has unfinished slices (<list>). Run `/forge` to finish them, or confirm you want to seal anyway.
 
    Don't archive a half-done plan without the operator saying so.
+   For an app that keeps records, also confirm `/temper` verified persistence (a record survives a restart) — don't seal a record-keeping app whose data could vanish; if unsure, send it back to `/temper`.
 
 3. **Mark and move.** Flip the frontmatter and relocate the file:
 
