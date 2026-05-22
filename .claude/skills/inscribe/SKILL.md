@@ -40,6 +40,12 @@ Ponder → Forge → Temper → Seal      (the Ponder phase = /ponder then /insc
    ## Constraints / out of scope
    <anything deliberately not being done>
 
+   ## Where your data is kept
+   <Plain words: what the app saves and where it lives so it's never lost. e.g. "Your client records are saved on this computer in a file the app keeps — they're still here after you close and reopen it, and after the app restarts." For a tool that saves nothing: "This tool doesn't save anything — it just calculates.">
+
+   ## How this app runs
+   <Plain words + the start contract. e.g. "Runs as one small program started with `npm start`, serving on the port it's given." For a static page with no server: "Opens as a single web page — no server needed.">
+
    ---
 
    ## Slice 1: <title>
@@ -64,3 +70,4 @@ Ponder → Forge → Temper → Seal      (the Ponder phase = /ponder then /insc
 - **Slices are the unit.** The top checklist and the `## Slice N:` sections must stay in sync (same count, same titles).
 - **Don't overwrite.** If the slug exists, stop and tell the operator.
 - **No code.** `/inscribe` writes the plan; `/forge` builds it.
+- **Settle storage before slicing.** If the app keeps records the user relies on, the plan MUST specify durable server-side storage (a tiny built-in server + a JSON data file, or SQLite for large/relational data) — never browser-only storage — and the slices must build it. Record the choice in plain words in "Where your data is kept". Follow the build doctrine in `CLAUDE.md`.
