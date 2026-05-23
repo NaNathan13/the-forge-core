@@ -7,7 +7,7 @@ This repo is both the working source of the workflow AND something you can drop 
 ## The loop
 
 ```
-Ponder ─┬ /ponder    grill the idea into shared understanding
+Ponder ─┬ /ponder    grill the idea into shared understanding (lean on /research at an unknown)
         └ /inscribe  write the sliced plan to .claude/plans/active/<slug>.md
 Forge ─── /forge     build the whole plan inline, ticking off slices
 Temper ── /temper    review + harden what was built; send weak slices back

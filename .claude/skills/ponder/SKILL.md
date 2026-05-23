@@ -19,6 +19,8 @@ Ponder → Forge → Temper → Seal      (the Ponder phase = /ponder then /insc
 
 3. **Grill it.** For anything non-trivial, lean on the `grill-me` skill to stress-test the idea: walk the decision tree, surface hidden assumptions, settle each open question one at a time. Skip the grilling only when the work is genuinely small and unambiguous.
 
+   **Research on demand.** Grill first; when a question can't be settled from the codebase or known facts — an unfamiliar library, prior art, a fork you can't call — lean on the `research` skill, then feed what comes back into the next question. Light research just runs; deep research (a parallel subagent fan-out) confirms with the operator before launching. Research informs the grill; it writes nothing.
+
 4. **Settle the slices.** By the end you should know, roughly, how the work breaks into parts — the slices `/inscribe` will write down. A slice is one coherent chunk of work you could describe in a sentence. Aim for a handful, not twenty.
 
 5. **Hand off.** Once the shape is clear, stop and recommend the next step:

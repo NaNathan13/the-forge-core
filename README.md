@@ -30,7 +30,7 @@ Four phases, run as five commands, one at a time — nothing auto-chains, so you
 | `/temper` | Temper | Reviews and hardens it; sends weak slices back to forge |
 | `/seal` | Seal | Confirms it's done and files the plan under `done/` |
 
-Reach for these anytime: `/grill-me` (stress-test an idea), `/diagnose` (a calm debugging loop), `/scrub` (tidy up plan state), `/sharpen` (turn a rough idea into a sharp prompt).
+Reach for these anytime: `/grill-me` (stress-test an idea), `/research` (go find out — light, or deep when it's worth it), `/diagnose` (a calm debugging loop), `/scrub` (tidy up plan state), `/sharpen` (turn a rough idea into a sharp prompt).
 
 ## Edit here when…
 
