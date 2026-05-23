@@ -20,7 +20,7 @@
 
 **Seal**: The closer phase. Confirms every slice is done, flips frontmatter to `status: done`, and moves the plan from `active/` to `done/`.
 
-**Plan**: A single `.claude/plans/<active|done>/<slug>.md` file — frontmatter (`name`, `created`, `status`), a `## Progress` block, a `## Goal`, optional constraints, and one `## Slice N:` section per slice.
+**Plan**: A single `.claude/plans/<active|done>/<slug>.md` file — frontmatter (`name`, `created`, `status`), a `## Progress` block, a `## Goal`, optional constraints and research, and one `## Slice N:` section per slice.
 
 **Slice**: One coherent chunk of a plan. Appears as a checklist item in the progress block and as a `## Slice N:` detail section.
 

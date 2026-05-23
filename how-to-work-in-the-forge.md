@@ -48,6 +48,7 @@ Building anything is four phases, run as five commands — one at a time. You ty
 ## A few utilities
 
 - **`/grill-me`** — stress-test any idea or plan with relentless one-at-a-time questions.
+- **`/research`** — go find out what an idea needs: light by default (read the code, a quick lookup), or deep (parallel agents across sources) when it's worth it. `/ponder` leans on it.
 - **`/diagnose`** — a calm debugging loop for when something's broken and the cause isn't obvious.
 - **`/scrub`** — tidy up: reconcile plan state, re-render a stale progress bar, sweep junk.
 - **`/sharpen`** — turn a rough idea into a precise, paste-ready prompt for any session or tool.

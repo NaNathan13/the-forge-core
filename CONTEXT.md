@@ -4,11 +4,15 @@ Single source of truth for the terms the workflow uses.
 
 ## Ponder
 
-The thinking phase — first of the four. `/ponder` grills a fuzzy idea into shared understanding — scope, the shape of "done", how the work splits into slices — without writing any code or plan file. It ends by handing off to `/inscribe`.
+The thinking phase — first of the four. `/ponder` grills a fuzzy idea into shared understanding — scope, the shape of "done", how the work splits into slices — without writing any code or plan file. When the grilling hits a question it can't settle from the codebase or known facts, it leans on `/research`. It ends by handing off to `/inscribe`.
 
 ## Inscribe
 
 The plan-writing step that ends the Ponder phase (a command, not a phase of its own). `/inscribe` records the understanding from `/ponder` as a single markdown file at `.claude/plans/active/<slug>.md`, sliced into parts, with a progress block near the top.
+
+## Research
+
+A sub-skill `/ponder` leans on (and usable on its own) when a question can't be settled from the codebase or known facts. Two depths: **light** — inline, in-session: read the code, maybe a web lookup; and **deep** — a parallel subagent fan-out across sources for genuinely novel unknowns, which confirms before launching. Research only gathers and reports; `/inscribe` records what mattered in the plan's `## Research` section.
 
 ## Forge
 
@@ -24,7 +28,7 @@ The closer phase. `/seal` confirms every slice is done, flips the plan's frontma
 
 ## Plan
 
-A single markdown file at `.claude/plans/active/<slug>.md` (in-flight) or `.claude/plans/done/<slug>.md` (finished). Holds frontmatter (`name`, `created`, `status`), a `## Progress` block (a 10-cell bar + a slice checklist), a `## Goal`, optional `## Constraints / out of scope`, and one `## Slice N:` section per slice.
+A single markdown file at `.claude/plans/active/<slug>.md` (in-flight) or `.claude/plans/done/<slug>.md` (finished). Holds frontmatter (`name`, `created`, `status`), a `## Progress` block (a 10-cell bar + a slice checklist), a `## Goal`, optional `## Constraints / out of scope` and `## Research` sections, and one `## Slice N:` section per slice.
 
 ## Slice
 
