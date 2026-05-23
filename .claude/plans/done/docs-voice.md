@@ -1,7 +1,7 @@
 ---
 name: docs-voice
 created: 2026-05-23
-status: active
+status: done
 ---
 
 # Give the docs the voice of a forge
