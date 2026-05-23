@@ -1,6 +1,6 @@
 # The Forge Core
 
-A four-phase workflow for Claude Code: **Ponder → Forge → Temper → Seal** — think it, build it, harden it, finish it. All planning and progress lives in markdown plan files under `.claude/plans/` — `active/` for in-flight work, `done/` for finished. No GitHub issues, no PRs, no orchestration, no subagents. One workflow, run inline.
+A four-phase workflow for Claude Code: **Ponder → Forge → Temper → Seal** — think it, build it, harden it, finish it. All planning and progress lives in markdown plan files under `.claude/plans/` — `active/` for in-flight work, `done/` for finished. No GitHub issues, no PRs, no orchestration. The build runs inline on your branch; read-only subagents may **gather** (research) or **judge** (cold review) and report back, but never write code or own a phase. One workflow, run inline.
 
 This repo is both the working source of the workflow AND something you can drop into any project (via the install script).
 

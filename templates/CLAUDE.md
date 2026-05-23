@@ -17,7 +17,7 @@ One-line description of what this project is.
 
 ## How work flows here
 
-Four phases, run inline and in order: **`/ponder`** (think it through) → **`/inscribe`** (write the sliced plan) → **`/forge`** (build it slice by slice) → **`/temper`** (review and harden) → **`/seal`** (confirm done). State lives in `.claude/plans/` — `active/` for in-flight, `done/` for finished. No GitHub issues, no PRs, no subagents; `ls .claude/plans/active/` is the whole ledger.
+Four phases, run inline and in order: **`/ponder`** (think it through) → **`/inscribe`** (write the sliced plan) → **`/forge`** (build it slice by slice) → **`/temper`** (review and harden) → **`/seal`** (confirm done). State lives in `.claude/plans/` — `active/` for in-flight, `done/` for finished. No GitHub issues, no PRs; the build runs inline, though read-only subagents may gather or review and report back. `ls .claude/plans/active/` is the whole ledger.
 
 ## Rules
 
