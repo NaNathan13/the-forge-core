@@ -1,6 +1,6 @@
 ---
 name: temper
-description: Phase 3 of the workflow — review and harden what /forge built. Checks each slice against the plan, fixes issues inline, and sends weak slices back by un-ticking them. Triggered by /temper after /forge.
+description: Phase 3 of the workflow — review and harden what /forge built. Checks each slice against the plan, fixes issues inline, and sends weak slices back by un-ticking them. Runs warm by default; /temper cold adds one read-only fresh-eyes reviewer whose findings feed the inline triage. Triggered by /temper after /forge.
 ---
 
 # /temper — review and harden
