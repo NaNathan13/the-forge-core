@@ -1,7 +1,7 @@
 ---
 name: ponder-research
 created: 2026-05-23
-status: active
+status: done
 ---
 
 # Add a research sub-phase to the Ponder session
