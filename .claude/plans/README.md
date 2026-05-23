@@ -30,6 +30,15 @@ What we're building and why. What "done" looks like.
 ## Constraints / out of scope
 Anything deliberately not being done.
 
+## Research
+Optional — only when /ponder did research. The key facts that shaped the plan, with source links.
+
+## Where your data is kept
+Plain words: what the app saves and where, so it's never lost (e.g. "Accounts live in a JSON file on the server — they survive a restart"). For a tool that saves nothing, say so.
+
+## How this app runs
+Plain words + the start contract (e.g. "One Node process, `npm start`, serving UI + API on its port").
+
 ---
 
 ## Slice 1: Add login form

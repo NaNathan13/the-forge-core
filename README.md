@@ -1,12 +1,12 @@
 # The Forge Core
 
-A calm, four-phase way to build things with Claude Code — **Ponder → Forge → Temper → Seal**. A few small skills, plans kept as plain markdown on disk, and your own session doing the work. No issues, no PRs, no orchestration — just the steadiness of the four phases.
+Raw idea in, working code out. Four phases — **Ponder → Forge → Temper → Seal** — shape it, hammer it, harden it, stamp it. A handful of small skills, plans kept as plain markdown on disk, your own session swinging the hammer. No issues, no PRs, no orchestration. No ceremony.
 
 It's also the brain behind [The Forge GUI](../the-forge-gui): the no-terminal app installs these skills into every project it builds.
 
 ## Get started
 
-From your project folder, run the installer (it fetches and installs in one step):
+From your project folder, one command fetches and installs it:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/NaNathan13/the-forge-core/main/light-the-core.sh | bash
@@ -14,26 +14,26 @@ curl -fsSL https://raw.githubusercontent.com/NaNathan13/the-forge-core/main/ligh
 
 Then open the project in Claude Code and type `/ponder`. That's the whole start.
 
-The installer adds the skills under `.claude/`, sets up `plans/{active,done}/`, and drops starter `CLAUDE.md` / `CONTEXT.md` / `README.md` — only if you don't already have them, so it never clobbers your docs. **New here?** [**How to work in The Forge**](how-to-work-in-the-forge.md) walks you through your first build.
+The installer drops the skills under `.claude/`, sets up `plans/{active,done}/`, and lays down starter `CLAUDE.md` / `CONTEXT.md` / `README.md` — only if you don't already have them, so it never clobbers your docs. **New here?** [**How to work in The Forge**](how-to-work-in-the-forge.md) walks you through your first build.
 
-> Prefer to set it up from inside Claude? Run the `/light-the-core` skill — same installer, and it asks three quick questions (project name, what it is, tech stack) to fill the starter docs in for you.
+> Rather set up from inside Claude? Run the `/light-the-core` skill — same installer, and it asks three quick questions (project name, what it is, tech stack) to fill the starter docs for you.
 
 ## The five commands
 
-Four phases, run as five commands, one at a time — nothing auto-chains, so you're always in control of when the next step starts.
+Four phases, five commands, one at a time. Nothing auto-chains — you decide when the next blow lands.
 
 | Command | Phase | What it does |
 |---|---|---|
-| `/ponder` | Ponder | Asks a few plain questions to think the idea through — no code yet |
-| `/inscribe` | Ponder | Writes the plan to `.claude/plans/active/<slug>.md` |
+| `/ponder` | Ponder | Grills the idea into shape — questions, no code |
+| `/inscribe` | Ponder | Writes the sliced plan to `.claude/plans/active/<slug>.md` |
 | `/forge` | Forge | Builds the plan slice by slice, ticking each off |
-| `/temper` | Temper | Reviews and hardens it; sends weak slices back to forge |
+| `/temper` | Temper | Reviews and hardens it; sends weak slices back to the fire |
 | `/seal` | Seal | Confirms it's done and files the plan under `done/` |
 
-Reach for these anytime: `/grill-me` (stress-test an idea), `/research` (go find out — light, or deep when it's worth it), `/diagnose` (a calm debugging loop), `/scrub` (tidy up plan state), `/sharpen` (turn a rough idea into a sharp prompt).
+Reach for these anytime: `/grill-me` (stress-test an idea), `/research` (go find out — light, or deep when it's worth it), `/diagnose` (a disciplined debugging loop), `/scrub` (tidy up plan state), `/sharpen` (turn a rough idea into a sharp prompt).
 
 ## Edit here when…
 
-…you're changing how apps get **built** — the intake questions, how work is planned and sliced, how data is stored, or the rules generated apps follow. The look of the no-terminal app — its preview, gallery, and chrome — lives over in [The Forge GUI](../the-forge-gui).
+…you're changing how apps get **built** — the intake questions, how work gets planned and sliced, how data is stored, the rules generated apps follow. The no-terminal app's look — preview, gallery, chrome — lives in [The Forge GUI](../the-forge-gui).
 
-State is just files: `ls .claude/plans/active/` is your whole ledger.
+State is just files. `ls .claude/plans/active/` is the whole ledger.

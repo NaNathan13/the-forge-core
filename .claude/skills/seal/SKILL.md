@@ -5,7 +5,7 @@ description: Phase 4 of the workflow — finish a plan. Confirms every slice is 
 
 # /seal — finish the plan
 
-`/seal` is the **closer phase**. It confirms the work is complete and archives the plan. Inline — no subagents, no merge.
+`/seal` is the **closer phase** — last look, then it's done. It confirms the work is complete and archives the plan. Inline — no subagents, no merge.
 
 ```
 Ponder → Forge → Temper → Seal      (the Ponder phase = /ponder then /inscribe)

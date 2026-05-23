@@ -1,7 +1,7 @@
 # <placeholder: project-name>
 
 <!--
-  Starter CLAUDE.md for the lightweight four-phase workflow.
+  Starter CLAUDE.md for the four-phase workflow.
   State lives in .claude/plans/active/<slug>.md (markdown), not in GitHub.
   Replace placeholders below. Keep this file short — it loads every session.
 -->

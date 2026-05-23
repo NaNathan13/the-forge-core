@@ -1,6 +1,6 @@
 # CONTEXT — glossary
 
-Single source of truth for the terms the workflow uses.
+Every term the workflow uses, pinned down once. When a word turns fuzzy mid-build, settle it here.
 
 ## Ponder
 

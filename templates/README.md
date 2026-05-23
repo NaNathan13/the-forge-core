@@ -9,7 +9,7 @@ One-line description of what this project is.
 
 ## How this project is built
 
-This repo uses a calm, four-phase Claude Code workflow — **Ponder → Forge → Temper → Seal**. Plans live as plain markdown under `.claude/plans/`; there's no GitHub ceremony.
+This repo is built with a four-phase Claude Code workflow — **Ponder → Forge → Temper → Seal**. Plans live as plain markdown under `.claude/plans/`; no GitHub ceremony.
 
 To build or change something, open the project in Claude Code and type `/ponder`. The full loop is in [How to work in The Forge](https://github.com/NaNathan13/the-forge-core/blob/main/how-to-work-in-the-forge.md).
 

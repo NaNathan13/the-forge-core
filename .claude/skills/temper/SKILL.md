@@ -5,7 +5,7 @@ description: Phase 3 of the workflow — review and harden what /forge built. Ch
 
 # /temper — review and harden
 
-`/temper` is the **review-and-harden phase**. It checks the built work against the plan, tightens it up, and flags anything that isn't really done. Inline — no subagents.
+`/temper` is the **review-and-harden phase** — it puts the build to the test. It checks the work against the plan, tightens what's sound, and flags what isn't really done. Inline — no subagents.
 
 ```
 Ponder → Forge → Temper → Seal      (the Ponder phase = /ponder then /inscribe)
