@@ -1,7 +1,7 @@
 ---
 name: subagent-doctrine
 created: 2026-05-23
-status: active
+status: done
 ---
 
 # Settle the subagent doctrine + add cold temper
