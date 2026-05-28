@@ -16,12 +16,6 @@ Seal ──── /seal      confirm done and move the plan to .claude/plans/don
 
 State = `ls .claude/plans/active/`.
 
-## Tech stack
-
-- **Language / runtime:** Markdown + Bash. The workflow has no runtime.
-- **Check command:** `bash -n` on changed shell scripts.
-- **Git:** phases commit at their natural end on the current branch.
-
 ## Key terms
 
 See [`CONTEXT.md`](./CONTEXT.md). Essentials:
@@ -35,6 +29,14 @@ See [`CONTEXT.md`](./CONTEXT.md). Essentials:
 - **Work in place** on the current branch; phases commit at their natural end.
 - **The plan file is the only state.** Keep the progress block current.
 - **Stay in scope.** Build what the slices describe.
+
+## Response style
+
+- Aim for terse, not silent. Cut filler — no restating the request, no "I'll now..." preamble.
+- Keep narrating what you're working on as you go; short status updates are welcome.
+- Explain what you did and what's next, but a sentence or two is plenty — no paragraph-long recaps.
+- A short plan before non-trivial work is good. Skip the plan for one-off edits.
+- Code blocks only for code.
 
 ## Context loading
 
