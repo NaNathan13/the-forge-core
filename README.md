@@ -1,39 +1,58 @@
 # The Forge Core
 
-Raw idea in, working code out. Four phases — **Ponder → Forge → Temper → Seal** — shape it, hammer it, harden it, stamp it. A handful of small skills, plans kept as plain markdown on disk, your own session swinging the hammer. No issues, no PRs, no orchestration. No ceremony.
+A four-phase workflow for Claude Code: **Ponder → Forge → Temper → Seal**. Plans live as plain markdown files under `.claude/plans/`.
 
-It's also the brain behind [The Forge GUI](../the-forge-gui): the no-terminal app installs these skills into every project it builds.
+## Install
 
-## Get started
-
-From your project folder, one command fetches and installs it:
+From your project folder:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/NaNathan13/the-forge-core/main/light-the-core.sh | bash
 ```
 
-Then open the project in Claude Code and type `/ponder`. That's the whole start.
+This drops the skills under `.claude/`, scaffolds `.claude/plans/{active,done}/`, and seeds `CLAUDE.md`, `CONTEXT.md`, and `README.md` if they're missing. Open the project in Claude Code and run `/ponder` to start.
 
-The installer drops the skills under `.claude/`, sets up `plans/{active,done}/`, and lays down starter `CLAUDE.md` / `CONTEXT.md` / `README.md` — only if you don't already have them, so it never clobbers your docs. **New here?** [**How to work in The Forge**](how-to-work-in-the-forge.md) walks you through your first build.
-
-> Rather set up from inside Claude? Run the `/light-the-core` skill — same installer, and it asks three quick questions (project name, what it is, tech stack) to fill the starter docs for you.
-
-## The five commands
-
-Four phases, five commands, one at a time. Nothing auto-chains — you decide when the next blow lands.
+## Workflow
 
 | Command | Phase | What it does |
 |---|---|---|
-| `/ponder` | Ponder | Grills the idea into shape — questions, no code |
+| `/ponder` | Ponder | Questions the idea into shape — no code yet |
 | `/inscribe` | Ponder | Writes the sliced plan to `.claude/plans/active/<slug>.md` |
 | `/forge` | Forge | Builds the plan slice by slice, ticking each off |
-| `/temper` | Temper | Reviews and hardens it; sends weak slices back to the fire |
-| `/seal` | Seal | Confirms it's done and files the plan under `done/` |
+| `/temper` | Temper | Reviews the build; un-ticks slices that need rework |
+| `/seal` | Seal | Confirms done and moves the plan to `done/` |
 
-Reach for these anytime: `/grill-me` (stress-test an idea), `/research` (go find out — light, or deep when it's worth it), `/diagnose` (a disciplined debugging loop), `/scrub` (tidy up plan state), `/sharpen` (turn a rough idea into a sharp prompt).
+One command at a time. You drive the loop.
 
-## Edit here when…
+## Example
 
-…you're changing how apps get **built** — the intake questions, how work gets planned and sliced, how data is stored, the rules generated apps follow. The no-terminal app's look — preview, gallery, chrome — lives in [The Forge GUI](../the-forge-gui).
+```
+> /ponder
+  add CSV export to the reports page
+  (Claude asks questions, settles scope, names the slices)
 
-State is just files. `ls .claude/plans/active/` is the whole ledger.
+> /inscribe
+  (writes .claude/plans/active/csv-export.md)
+
+> /forge
+  (builds each slice, ticks the boxes, commits)
+
+> /temper
+  (reviews; sends Slice 2 back for rework)
+
+> /forge       # finish Slice 2
+> /temper      # all clear
+> /seal
+  (plan moves to .claude/plans/done/)
+```
+
+## Skills
+
+**Workflow** — `/ponder`, `/inscribe`, `/forge`, `/temper`, `/seal`
+
+**Utilities**
+
+- `/grill-me` — stress-test an idea with one-at-a-time questions
+- `/research` — look something up; deep parallel fan-out when needed
+- `/diagnose` — disciplined debugging loop
+- `/sharpen` — turn a rough idea into a precise prompt
